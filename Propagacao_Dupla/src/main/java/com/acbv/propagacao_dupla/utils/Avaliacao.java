@@ -14,31 +14,23 @@ import java.util.Set;
  * @author arthur
  */
 public class Avaliacao {
-    
+
     public double recall, precision, f_measure;
 
-    public Avaliacao(double recall, double precision, double f_measure) {
-        this.recall = recall;
-        this.precision = precision;
-        this.f_measure = f_measure;
-    }
-
-    @Override
-    public String toString() {
-        return "Avaliacao{" + "recall=" + recall + ", precision=" + precision + ", f_measure=" + f_measure + '}';
-    }
-    
-    public Avaliacao getAvalicao(Set relevant, Set retrieved){
+    public Avaliacao(Set relevant, Set retrieved) {
         double n_doc_ret = retrieved.size();
         double n_doc_rel = relevant.size();
         List rel_ret = new ArrayList<>(relevant);
         rel_ret.retainAll(retrieved);
         double n_doc_rel_ret = rel_ret.size();
-        this.precision = n_doc_rel_ret/n_doc_ret;
-        this.recall = n_doc_rel_ret/n_doc_rel;
+        this.precision = n_doc_rel_ret / n_doc_ret;
+        this.recall = n_doc_rel_ret / n_doc_rel;
         this.f_measure = 2 * ((precision * recall) / (precision + recall));
-        return this;
     }
     
-    
+    @Override
+    public String toString() {
+        return "Avaliacao{" + "recall=" + recall + ", precision=" + precision + ", f_measure=" + f_measure + '}';
+    }
+
 }
